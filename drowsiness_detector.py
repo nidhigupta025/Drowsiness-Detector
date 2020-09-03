@@ -106,16 +106,20 @@ while True:
             if not drowsy_eye:
                 drowsy_eye = True
                 drowsy_start_time = time.time()
+                
+            if drowsy_eye==True and time.time()-drowsy_start_time>0.4:
+                cv2.putText(frame, "DROWSINESS ALERT!", (10, 55), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
 
             if time.time() - drowsy_start_time >= 1.5:
-
+                
                 drowsy_start_time = time.time()
                 is_alarm_working = False
                 if not is_alarm_working:
+                    #cv2.putText(frame, "DROWSINESS ALERT!", (10, 55), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
                     is_alarm_working = True
                     alarm()
-
-                cv2.putText(frame, "DROWSINESS ALERT!", (10, 55), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+            
+            
         else:
             drowsy_start_time = time.time()
             is_alarm_working = False
